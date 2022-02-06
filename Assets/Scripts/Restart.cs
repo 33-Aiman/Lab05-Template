@@ -8,8 +8,8 @@ public class Restart : MonoBehaviour
   
 
     // Update is called once per frame
-    void RestartButton()
+    public void RestartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameofScene");
     }
 }
