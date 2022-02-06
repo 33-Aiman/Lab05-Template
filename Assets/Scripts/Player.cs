@@ -6,8 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    private float scorevalue;
+    public float totalcoins;
+    public float timeleft;
+    public float timeRemaining;
+   
+
     public Text Scoretext;
-    public int score;
+    public Text Timertext;
+
+    
+    public float TimerValue ;
 
     Rigidbody PlayerRigidbody;
     void Start()
@@ -18,38 +27,44 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+        timeleft -= Time.deltaTime;
+        timeRemaining = Mathf.FloorToInt(timeleft % 60);
+        Timertext.text = "Timer: " + timeRemaining.ToString();
+
+        if (scorevalue == 60 && totalcoins == 6)
+        {
+            if(timeleft <= TimerValue || timeleft >= 0)
+            {
+                SceneManager.LoadScene("GameWinScene");
+            }
+        }
+
+        else if (timeleft <= 0)
+        {
+            SceneManager.LoadScene("GameLoseScene");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coin")
         {
-            Debug.Log("Coin has been detected!!!");
-            score += 10;
-            Scoretext.text = "Score: " + score.ToString();
+            totalcoins++;
+            scorevalue += 10;
+            Scoretext.text = "Score: " + scorevalue.ToString();
             Destroy(other.gameObject);
-            if (score == 60)
-            {
-                SceneManager.LoadScene("GameWinScene");
-            }
+           
         }
 
-        /*
-        if (other.gameObject.tag == "Collectibles")
+        if (other.gameObject.tag == "Water")
         {
-            score++;
-            ScoreText.text = "Score: " + score.ToString();
-            Destroy(other.gameObject);
-            if (score == 4)
-            {
-                //SceneManager.LoadScene("MazeGameLevel2");
-                SceneManager.LoadScene("GameWin");
-            }
+            
+            SceneManager.LoadScene("GameLoseScene");
         }
-        */
 
-    
+
+
+
 
     }
 
