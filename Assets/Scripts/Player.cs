@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     Rigidbody PlayerRigidbody;
     void Start()
     {
+        
         PlayerRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
         else if (timeleft <= 0)
         {
             SceneManager.LoadScene("GameLoseScene");
+           
         }
     }
 
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour
         {
             
             SceneManager.LoadScene("GameLoseScene");
+         
         }
 
 
