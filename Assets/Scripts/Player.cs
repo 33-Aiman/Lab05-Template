@@ -6,23 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Text Scoretext;
+    public int score;
+
+    Rigidbody PlayerRigidbody;
     void Start()
     {
-        
+        PlayerRigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Coin")
         {
-          
+            Debug.Log("Coin has been detected!!!");
+            score += 10;
+            Scoretext.text = "Score: " + score.ToString();
+            Destroy(other.gameObject);
+            if (score == 60)
+            {
+                SceneManager.LoadScene("GameWinScene");
+            }
         }
 
         /*
